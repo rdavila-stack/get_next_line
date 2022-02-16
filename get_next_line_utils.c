@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rdavila <rdavila@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: mbarut <mbarut@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 13:29:53 by rdavila           #+#    #+#             */
-/*   Updated: 2022/02/02 10:44:42 by rdavila          ###   ########.fr       */
+/*   Updated: 2022/02/16 13:51:00 by mbarut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,13 +88,13 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	size_t	i;
 
 	i = 0;
+	if ((unsigned int)ft_strlen(s) < start)
+		return (ft_strdup(""));
 	if (!s)
 		return (0);
 	str = (char *)malloc((len + 1) * sizeof(char));
 	if (!str)
 		return (0);
-	if ((unsigned int)ft_strlen(s) < start)
-		return (ft_strdup(""));
 	while (i < len)
 		str[i++] = s[start++];
 	str[i] = '\0';

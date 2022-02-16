@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rdavila <rdavila@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: mbarut <mbarut@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 13:28:50 by rdavila           #+#    #+#             */
-/*   Updated: 2022/02/02 12:53:22 by rdavila          ###   ########.fr       */
+/*   Updated: 2022/02/16 13:52:19 by mbarut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,19 +52,29 @@ char	*get_next_line(int fd)
 	}
 	output = ft_get_line(&line); //output = ft_get_line
 	free(buf);
+	if (!*output)
+	{
+		free(output);
+		output = NULL;
+	}
 	return (output);
 }
 
-/*int	main()
+int	main()
 {
 	int fd;
 	fd = open("main.txt", O_RDONLY);
+	static char *lines[100];
 	char *junkie;
-	junkie = get_next_line(fd);
-	while (junkie != NULL)
+	int i = 0;
+	lines[i] = get_next_line(fd);
+	while (lines[i] != NULL)
 	{
-		printf("%s \n", junkie);
-		junkie = get_next_line(fd);
+		printf("%s \n", lines[i]);
+		lines[++i] = get_next_line(fd);
 	}
+	--i;
+	while (i >= 0 && lines[i])
+		free(lines[i--]);
 	return (0);
-}*/
+}
